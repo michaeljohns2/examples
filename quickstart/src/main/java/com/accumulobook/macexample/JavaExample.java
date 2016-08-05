@@ -11,6 +11,7 @@ import org.apache.accumulo.core.data.Value;
 import org.apache.accumulo.core.iterators.user.GrepIterator;
 import org.apache.accumulo.core.security.Authorizations;
 import org.apache.accumulo.core.security.ColumnVisibility;
+import org.apache.accumulo.server.watcher.Log4jConfiguration;
 import org.apache.accumulo.core.client.AccumuloException;
 import org.apache.accumulo.core.client.AccumuloSecurityException;
 import org.apache.accumulo.core.client.BatchWriter;
@@ -25,6 +26,8 @@ import org.apache.accumulo.core.client.ZooKeeperInstance;
 import org.apache.accumulo.core.client.security.tokens.PasswordToken;
 import org.apache.accumulo.core.client.Scanner;
 import org.apache.hadoop.io.Text;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
@@ -166,8 +169,13 @@ public class JavaExample {
     private String zookeepers;
 
     public Connector getConnection() throws AccumuloException, AccumuloSecurityException {
+    	
+    	//MLJ: REDUCE LOG NOISE    	
+    	LogManager.getRootLogger().setLevel(Level.ERROR);
+    	
         Instance i = new ZooKeeperInstance(instance, zookeepers);
         Connector conn = i.getConnector(user, new PasswordToken(password));
+        
         return conn;
     }
 

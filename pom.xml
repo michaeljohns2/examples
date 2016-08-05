@@ -10,7 +10,8 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <!-- MLJ: updated from 2.3.2 -->
+        <version>3.5.1</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
@@ -31,18 +32,35 @@
           </descriptorRefs>
         </configuration>
       </plugin>
+      <!-- MLJ: Adding source plugin (to verify / pre-install) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
     <dependency>
       <groupId>org.apache.accumulo</groupId>
       <artifactId>accumulo-core</artifactId>
-      <version>1.6.0</version>
+      <!-- MLJ: updated from 1.6.0 -->
+      <version>1.6.5</version>
     </dependency>
     <dependency>
       <groupId>org.apache.accumulo</groupId>
       <artifactId>accumulo-minicluster</artifactId>
-      <version>1.6.0</version>
+      <!-- MLJ: updated from 1.6.0 -->
+      <version>1.6.5</version>
     </dependency>
     <dependency>
       <groupId>org.apache.hadoop</groupId>
@@ -88,14 +106,19 @@
     </dependency>
     <dependency>
       <groupId>org.apache.kafka</groupId>
+      <!-- MLJ: this had issues (maybe jar was provided?), increasing version  
       <artifactId>kafka_2.8.0</artifactId>
       <version>0.8.0</version>
       <type>jar</type>
+      -->
+      <artifactId>kafka_2.10</artifactId>
+      <version>0.8.2.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.accumulo</groupId>
       <artifactId>accumulo-proxy</artifactId>
-      <version>1.6.0</version>
+      <!-- MLJ: updated from 1.6.0 -->
+      <version>1.6.5</version>
     </dependency>
     <dependency>
       <groupId>org.twitter4j</groupId>
@@ -127,8 +150,12 @@
   </dependencies>
   <repositories>
     <repository>
-      <id>info-bliki-repository</id>
-      <url>http://gwtwiki.googlecode.com/svn/maven-repository/</url>
+      <!-- MLJ: No longer valid, see https://bitbucket.org/axelclk/info.bliki.wiki/wiki/Home
+      	<id>info-bliki-repository</id> 
+      	<url>http://gwtwiki.googlecode.com/svn/maven-repository/</url>
+      -->
+      <id>sonatype-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/</url>
       <releases>
         <enabled>true</enabled>
       </releases>

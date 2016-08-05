@@ -9,10 +9,11 @@
   <url>http://github.com/accumulobook/sourcecode</url>
 
   <properties>
-    <accumulo.version>1.6.2</accumulo.version>
+    <!-- MLJ: updated from 1.6.2 -->
+    <accumulo.version>1.6.5</accumulo.version>
     <hadoop.version>2.6.0</hadoop.version>
     <zookeeper.version>3.4.6</zookeeper.version>
-    <!-- Properties for running -->
+    <!-- Properties for running (MLJ: these are defaults `-D<prop>=<value>` overrides) -->
     <table.name>table2</table.name>
     <instance.name>accumulo</instance.name>
     <zookeeper.location>localhost:2181</zookeeper.location>
@@ -31,7 +32,8 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>exec-maven-plugin</artifactId>
-              <version>1.2.1</version>
+              <!-- MLJ: updated from 1.2.1 -->
+              <version>1.5.0</version>
               <configuration>
                 <executable>java</executable>
                 <arguments>
@@ -52,7 +54,8 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>exec-maven-plugin</artifactId>
-              <version>1.2.1</version>
+              <!-- MLJ: updated from 1.2.1 -->
+              <version>1.5.0</version>
               <configuration>
                 <executable>java</executable>
                 <arguments>
@@ -84,7 +87,8 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>exec-maven-plugin</artifactId>
-              <version>1.2.1</version>
+              <!-- MLJ: updated from 1.2.1 -->
+              <version>1.5.0</version>
               <configuration>
                 <executable>java</executable>
                 <arguments>
@@ -126,7 +130,8 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>exec-maven-plugin</artifactId>
-              <version>1.2.1</version>
+              <!-- MLJ: updated from 1.2.1 -->
+              <version>1.5.0</version>
               <configuration>
                 <executable>java</executable>
                 <arguments>
@@ -162,7 +167,8 @@
           <plugin>
               <groupId>org.codehaus.mojo</groupId>
               <artifactId>exec-maven-plugin</artifactId>
-              <version>1.2.1</version>
+              <!-- MLJ: updated from 1.2.1 -->
+              <version>1.5.0</version>
               <configuration>
                 <executable>java</executable>
                 <arguments>
@@ -195,7 +201,8 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <!-- MLJ: updated from 4.11 -->
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -304,18 +311,35 @@
     <dependency>
       <groupId>com.beust</groupId>
       <artifactId>jcommander</artifactId>
-      <version>1.35</version>
+      <!-- MLJ: updated from 1.35 -->
+      <version>1.48</version>
     </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
+        <!-- MLJ: updated from 2.0.2 -->
+        <version>3.5.1</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
         </configuration>
+      </plugin>
+      <!-- MLJ: Adding source plugin (to verify / pre-install) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <!--
       <plugin>
